@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="--color-primary-lt: #ffdbc9; --color-primary: #498c40; --color-primary-dark: #2e7632;"><head>
+<html lang="en" style="--color-primary-lt: #ffdbc9; --color-primary: #498c40; --color-primary-dark: #2f6f32;"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Strength-Based Assessment Lab — Bridges Graduate School of Cognitive Diversity</title>
@@ -9,7 +9,7 @@
   <style>
     :root {
       --color-primary:       #498c40;
-      --color-primary-dark:  #2e7632;
+      --color-primary-dark:  #2f6f32;
       --color-primary-lt:    #ffdbc9;
       --color-secondary:     #3B6FA0;
       --color-accent:        #F0C800;
@@ -1011,11 +1011,193 @@
   </style>
   
   
-</head>
+<style id="__webby-section-for-whom-styles">/* ══════════════════════════════════════
+   FOR WHOM
+══════════════════════════════════════ */
+section[data-zone="for-whom"] {
+  background: var(--color-primary-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.forwhom-deco {
+  position: absolute;
+  pointer-events: none;
+}
+.forwhom-deco.d1 {
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46,125,50,0.2) 0%, transparent 70%);
+  top: -80px; left: -80px;
+}
+.forwhom-deco.d2 {
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,200,0,0.15) 0%, transparent 70%);
+  bottom: -60px; right: -60px;
+}
+
+.forwhom-inner {
+  position: relative;
+  z-index: 1;
+}
+.forwhom-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+.forwhom-header .label { color: var(--color-accent); }
+.forwhom-header h2 {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  color: #fff;
+}
+.forwhom-header h2 em { font-style: italic; color: rgba(255,255,255,0.55); }
+
+.forwhom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.forwhom-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  transition: background 0.25s, transform 0.25s;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+.forwhom-card:hover {
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-3px);
+}
+.forwhom-icon {
+  width: 52px; height: 52px;
+  border-radius: var(--radius);
+  background: rgba(46,125,50,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.forwhom-card h3 {
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: var(--space-xs);
+}
+.forwhom-card p {
+  font-size: 0.88rem;
+  color: rgba(240,245,240,0.6);
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+  .forwhom-grid { grid-template-columns: 1fr; }
+}</style><style id="__webby-section-director-styles">section[data-zone="director"] {
+  background: var(--color-primary-dark); /* Changed from --color-primary */
+  position: relative;
+  overflow: hidden;
+}
+
+.director-deco {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.director-deco.d1 {
+  width: 400px; height: 400px;
+  background: rgba(255,255,255,0.06);
+  top: -120px; right: -80px;
+}
+.director-deco.d2 {
+  width: 240px; height: 240px;
+  background: rgba(255,255,255,0.05);
+  bottom: -60px; left: 10%;
+}
+
+.director-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.director-text .label { color: var(--color-accent); }
+.director-text h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: #fff;
+  margin-bottom: var(--space-md);
+}
+.director-text p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.85;
+  margin-bottom: var(--space-lg);
+}
+
+.video-placeholder {
+  background: rgba(0,0,0,0.25);
+  border-radius: var(--radius-lg);
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  border: 2px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: background 0.25s;
+  overflow: hidden;
+  position: relative;
+}
+.video-placeholder:hover { background: rgba(0,0,0,0.35); }
+.video-placeholder img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+.play-btn {
+  position: relative;
+  z-index: 1;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+.video-placeholder:hover .play-btn { transform: scale(1.08); }
+.play-btn::after {
+  content: '';
+  border-left: 26px solid var(--color-primary);
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  margin-left: 6px;
+}
+.video-caption {
+  position: relative;
+  z-index: 1;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 820px) {
+  .director-grid { grid-template-columns: 1fr; }
+}</style></head>
 <body style="">
 
 <!-- ══════════ NAV ══════════ -->
-<nav id="main-nav" style="" class="scrolled">
+<nav id="main-nav" style="" class="">
   <input type="checkbox" id="mobile-toggle">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
@@ -1225,7 +1407,7 @@
 </section>
 
 <!-- ══════════ DIRECTOR ══════════ -->
-<section data-zone="director" data-zone-label="From Our Director" class="section-pad" id="director" style="">
+<section data-zone="director" data-zone-label="From Our Director" class="section-pad" id="director">
   <div class="director-deco d1"></div>
   <div class="director-deco d2"></div>
   <div class="container">
