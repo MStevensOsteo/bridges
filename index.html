@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strength-Based Assessment Lab — Bridges Graduate School of Cognitive Diversity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary:       #2E7D32;
+      --color-primary-dark:  #1B5E20;
+      --color-primary-lt:    #4CAF50;
+      --color-secondary:     #3B6FA0;
+      --color-accent:        #F0C800;
+      --color-accent-lt:     #FFF9C4;
+      --color-bg:            #FFFFFF;
+      --color-bg-alt:        #F5F7F5;
+      --color-bg-dark:       #1A2B1A;
+      --color-text:          #1C2B1C;
+      --color-text-muted:    #5A6B5A;
+      --color-text-light:    #F0F5F0;
+      --font-heading:        'DM Serif Display', Georgia, serif;
+      --font-body:           'DM Sans', sans-serif;
+      --space-xs:   0.375rem;
+      --space-sm:   0.75rem;
+      --space-md:   1.25rem;
+      --space-lg:   2rem;
+      --space-xl:   3.5rem;
+      --space-2xl:  6rem;
+      --container-width: 1140px;
+      --radius:     4px;
+      --radius-lg:  14px;
+      --shadow:     0 4px 24px rgba(28,43,28,0.09);
+      --shadow-lg:  0 12px 48px rgba(28,43,28,0.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: 400;
+      line-height: 1.18;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+    }
+    .section-pad { padding: var(--space-2xl) 0; }
+
+    .label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius);
+      transition: all 0.22s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-green {
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .btn-green:hover { background: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(46,125,50,0.28); }
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+    .btn-outline:hover { background: var(--color-primary); color: #fff; transform: translateY(-2px); }
+    .btn-white {
+      background: #fff;
+      color: var(--color-primary-dark);
+    }
+    .btn-white:hover { background: var(--color-accent-lt); transform: translateY(-2px); }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 8000;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--color-primary);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(28,43,28,0.1); }
+
+    .nav-inner {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .nav-logo-mark {
+      width: 40px; height: 40px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark svg { width: 22px; height: 22px; }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-logo-text strong {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .nav-logo-text span {
+      font-size: 0.68rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--color-primary); }
+    .nav-links .nav-cta {
+      background: var(--color-primary);
+      color: #fff !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius);
+    }
+    .nav-links .nav-cta:hover { background: var(--color-primary-dark) !important; }
+
+    #mobile-toggle { display: none; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 9100;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    #mobile-toggle:checked ~ .nav-inner .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #mobile-toggle:checked ~ .nav-inner .hamburger span:nth-child(2) { opacity: 0; }
+    #mobile-toggle:checked ~ .nav-inner .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: #fff;
+      z-index: 9000;
+      padding: var(--space-lg);
+      border-top: 1px solid rgba(46,125,50,0.12);
+      box-shadow: 0 8px 32px rgba(28,43,28,0.12);
+      overflow-y: auto;
+      max-height: calc(100vh - 68px);
+    }
+    #mobile-toggle:checked ~ .mobile-menu { display: block; }
+    .mobile-menu ul { list-style: none; }
+    .mobile-menu ul li { border-bottom: 1px solid var(--color-bg-alt); }
+    .mobile-menu ul a {
+      display: block;
+      padding: var(--space-md) 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .mobile-menu ul a:hover { color: var(--color-primary); }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    section[data-zone="hero"] {
+      padding-top: 68px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      align-items: center;
+      padding: var(--space-2xl) var(--space-xl) var(--space-2xl) 0;
+      padding-left: calc((100vw - var(--container-width)) / 2 + var(--space-lg));
+      background: var(--color-bg);
+    }
+
+    .hero-content { max-width: 540px; }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px; height: 2px;
+      background: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      color: var(--color-text);
+      margin-bottom: var(--space-lg);
+      line-height: 1.1;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--color-primary);
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-xl);
+      line-height: 1.8;
+    }
+
+    .hero-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+
+    .hero-right {
+      position: relative;
+      background: var(--color-bg-alt);
+      overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+    }
+    .hero-right-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(46,125,50,0.18) 0%, rgba(240,200,0,0.10) 100%);
+      pointer-events: none;
+    }
+
+    /* Decorative shapes */
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-shape.s1 {
+      width: 180px; height: 180px;
+      background: var(--color-primary);
+      top: -60px; right: -60px;
+      opacity: 0.15;
+    }
+    .hero-shape.s2 {
+      width: 100px; height: 100px;
+      background: var(--color-accent);
+      bottom: 80px; right: 40px;
+      opacity: 0.55;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: var(--space-xl);
+      left: var(--space-xl);
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--shadow-lg);
+      max-width: 220px;
+    }
+    .hero-badge-num {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .hero-badge p {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    /* Accent bar */
+    .hero-accent-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(to bottom, var(--color-primary) 0%, var(--color-accent) 100%);
+    }
+
+    @media (max-width: 860px) {
+      section[data-zone="hero"] {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-left {
+        padding: var(--space-xl) var(--space-lg);
+        padding-left: var(--space-lg);
+      }
+      .hero-right { min-height: 360px; }
+    }
+
+    /* ══════════════════════════════════════
+       ANNOUNCEMENT
+    ══════════════════════════════════════ */
+    section[data-zone="announcement"] {
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .announce-deco {
+      position: absolute;
+      top: 0; right: 0;
+      width: 420px; height: 420px;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .announce-deco svg { width: 100%; height: 100%; }
+
+    .announce-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .announce-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .announce-img img {
+      width: 100%;
+    }
+    .announce-img-bar {
+      position: absolute;
+      left: 0; bottom: 0; top: 0;
+      width: 5px;
+      background: var(--color-primary);
+    }
+    .announce-text h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      margin-bottom: var(--space-lg);
+      color: var(--color-text);
+    }
+    .announce-text h2 em { font-style: italic; color: var(--color-primary); }
+    .announce-text p {
+      font-size: 0.97rem;
+      color: var(--color-text-muted);
+      line-height: 1.85;
+      margin-bottom: var(--space-md);
+    }
+    .mission-list {
+      list-style: none;
+      margin: var(--space-lg) 0;
+    }
+    .mission-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(46,125,50,0.08);
+      line-height: 1.65;
+    }
+    .mission-list li:last-child { border: none; }
+    .mission-list li::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 820px) {
+      .announce-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════
+       FOR WHOM
+    ══════════════════════════════════════ */
+    section[data-zone="for-whom"] {
+      background: var(--color-bg-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .forwhom-deco {
+      position: absolute;
+      pointer-events: none;
+    }
+    .forwhom-deco.d1 {
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,125,50,0.2) 0%, transparent 70%);
+      top: -80px; left: -80px;
+    }
+    .forwhom-deco.d2 {
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,200,0,0.15) 0%, transparent 70%);
+      bottom: -60px; right: -60px;
+    }
+
+    .forwhom-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .forwhom-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    .forwhom-header .label { color: var(--color-accent); }
+    .forwhom-header h2 {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      color: #fff;
+    }
+    .forwhom-header h2 em { font-style: italic; color: rgba(255,255,255,0.55); }
+
+    .forwhom-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+    }
+
+    .forwhom-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-lg);
+      transition: background 0.25s, transform 0.25s;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-lg);
+    }
+    .forwhom-card:hover {
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-3px);
+    }
+    .forwhom-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius);
+      background: rgba(46,125,50,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .forwhom-card h3 {
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: var(--space-xs);
+    }
+    .forwhom-card p {
+      font-size: 0.88rem;
+      color: rgba(240,245,240,0.6);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 700px) {
+      .forwhom-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════ */
+    section[data-zone="testimonials"] {
+      background: var(--color-bg-alt);
+    }
+    .testi-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    .testi-header h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+
+    .testi-track-wrap { overflow: hidden; }
+    .testi-track {
+      display: flex;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+    }
+    .testi-item {
+      min-width: 100%;
+      padding: 0 var(--space-xl);
+    }
+    .testi-card {
+      max-width: 780px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-2xl);
+      box-shadow: var(--shadow);
+      position: relative;
+      border-left: 5px solid var(--color-primary);
+    }
+    .testi-card::before {
+      content: '\201C';
+      font-family: var(--font-heading);
+      font-size: 7rem;
+      color: var(--color-primary);
+      opacity: 0.12;
+      position: absolute;
+      top: -10px; left: var(--space-xl);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .testi-card blockquote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-style: italic;
+      color: var(--color-text);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+      font-weight: 400;
+    }
+    .testi-card cite {
+      font-style: normal;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+    }
+    .testi-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    .testi-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid rgba(46,125,50,0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+    .testi-btn:hover { background: var(--color-primary); color: #fff; }
+    .testi-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .testi-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(46,125,50,0.2);
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .testi-dot.active {
+      background: var(--color-primary);
+      width: 22px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .testi-item { padding: 0; }
+      .testi-card { padding: var(--space-lg); }
+      .testi-card::before { font-size: 4rem; }
+    }
+
+    /* ══════════════════════════════════════
+       PROCESS
+    ══════════════════════════════════════ */
+    section[data-zone="process"] {
+      background: var(--color-bg);
+      position: relative;
+    }
+
+    .process-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--space-xl);
+    }
+    .process-header h2 { font-size: clamp(2rem, 3.5vw, 3rem); margin-bottom: var(--space-md); }
+    .process-header p { font-size: 1rem; color: var(--color-text-muted); line-height: 1.8; }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      position: relative;
+    }
+
+    /* Connecting line */
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.6% + 36px);
+      right: calc(16.6% + 36px);
+      height: 2px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+      pointer-events: none;
+    }
+
+    .process-step {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .process-step:hover {
+      border-bottom-color: var(--color-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step-num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-lg);
+      position: relative;
+      z-index: 1;
+    }
+    .process-step:nth-child(2) .step-num { background: var(--color-secondary); }
+    .process-step:nth-child(3) .step-num { background: var(--color-accent); color: var(--color-text); }
+
+    .process-step h3 { font-size: 1.45rem; margin-bottom: var(--space-sm); }
+    .process-step p { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.8; }
+
+    .process-closing {
+      margin-top: var(--space-xl);
+      text-align: center;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .process-closing p {
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-style: italic;
+      color: var(--color-primary);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 820px) {
+      .process-steps { grid-template-columns: 1fr; }
+      .process-steps::before { display: none; }
+    }
+
+    /* ══════════════════════════════════════
+       DIRECTOR / VIDEO
+    ══════════════════════════════════════ */
+    section[data-zone="director"] {
+      background: var(--color-primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .director-deco {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .director-deco.d1 {
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.06);
+      top: -120px; right: -80px;
+    }
+    .director-deco.d2 {
+      width: 240px; height: 240px;
+      background: rgba(255,255,255,0.05);
+      bottom: -60px; left: 10%;
+    }
+
+    .director-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .director-text .label { color: var(--color-accent); }
+    .director-text h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: #fff;
+      margin-bottom: var(--space-md);
+    }
+    .director-text p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+      margin-bottom: var(--space-lg);
+    }
+
+    .video-placeholder {
+      background: rgba(0,0,0,0.25);
+      border-radius: var(--radius-lg);
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      border: 2px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: background 0.25s;
+      overflow: hidden;
+      position: relative;
+    }
+    .video-placeholder:hover { background: rgba(0,0,0,0.35); }
+    .video-placeholder img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+    .play-btn {
+      position: relative;
+      z-index: 1;
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    .video-placeholder:hover .play-btn { transform: scale(1.08); }
+    .play-btn::after {
+      content: '';
+      border-left: 26px solid var(--color-primary);
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
+      margin-left: 6px;
+    }
+    .video-caption {
+      position: relative;
+      z-index: 1;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 820px) {
+      .director-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════ */
+    section[data-zone="contact"] { background: var(--color-bg-alt); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+    .contact-info h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: var(--space-md); }
+    .contact-info p { font-size: 0.97rem; color: var(--color-text-muted); line-height: 1.85; margin-bottom: var(--space-lg); }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-sm);
+    }
+    .contact-detail strong { color: var(--color-text); min-width: 70px; display: inline-block; }
+    .contact-detail a { color: var(--color-primary); }
+    .contact-detail a:hover { text-decoration: underline; }
+
+    .contact-form {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow);
+    }
+    .form-row { margin-bottom: var(--space-md); }
+    .form-row label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 0.45rem;
+    }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(46,125,50,0.18);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
+    }
+    .form-row textarea { height: 120px; resize: vertical; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
+    .form-submit {
+      width: 100%;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .form-submit:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+    .form-success {
+      display: none;
+      background: rgba(46,125,50,0.1);
+      color: var(--color-primary-dark);
+      border: 1px solid rgba(46,125,50,0.2);
+      padding: var(--space-md);
+      border-radius: var(--radius);
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: var(--space-md);
+    }
+
+    @media (max-width: 820px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      background: var(--color-bg-dark);
+      padding: var(--space-xl) 0;
+      border-top: 3px solid var(--color-primary);
+    }
+    .footer-inner {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .footer-logo-mark {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-logo-mark svg { width: 20px; height: 20px; }
+    .footer-brand-text strong {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(240,245,240,0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .footer-brand-text span {
+      font-size: 0.68rem;
+      color: rgba(240,245,240,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(240,245,240,0.35); }
+    .footer-links { display: flex; gap: var(--space-lg); }
+    .footer-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(240,245,240,0.4);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--color-accent); }
+
+    /* ══════════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.65s ease both; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.25s; }
+    .d3 { animation-delay: 0.42s; }
+    .d4 { animation-delay: 0.58s; }
+  </style>
+  
+  
+</head>
+<body style="">
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="main-nav" style="" class="scrolled">
+  <input type="checkbox" id="mobile-toggle">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9z" fill="rgba(255,255,255,0.3)"></path>
+          <path d="M8 8h3v8H8zM13 8h3v4h-3z" fill="white"></path>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        <strong>Bridges Grad School</strong>
+        <span>Strength-Based Assessment Lab</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#announcement">About</a></li>
+      <li><a href="#for-whom">Who We Serve</a></li>
+      <li><a href="#process">Our Process</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+      <li><a href="#director">Director</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <label for="mobile-toggle" class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </label>
+  </div>
+  <div class="mobile-menu">
+    <ul>
+      <li><a href="#announcement" onclick="document.getElementById('mobile-toggle').checked=false">About</a></li>
+      <li><a href="#for-whom" onclick="document.getElementById('mobile-toggle').checked=false">Who We Serve</a></li>
+      <li><a href="#process" onclick="document.getElementById('mobile-toggle').checked=false">Our Process</a></li>
+      <li><a href="#testimonials" onclick="document.getElementById('mobile-toggle').checked=false">Stories</a></li>
+      <li><a href="#director" onclick="document.getElementById('mobile-toggle').checked=false">Director</a></li>
+      <li><a href="#contact" onclick="document.getElementById('mobile-toggle').checked=false">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section data-zone="hero" data-zone-label="Hero" style="position: relative;" id="hero">
+  <div class="hero-left">
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up d1" data-editable="">Bridges Graduate School · Studio City, California</p>
+      <h1 class="hero-title fade-up d2" data-editable="">Your child's <em>strengths</em> are the key to their future.</h1>
+      <p class="hero-tagline fade-up d3" data-editable="">How are you supporting them? The Strength-Based Assessment Lab at Bridges identifies and nurtures what makes every learner uniquely gifted.</p>
+      <div class="hero-actions fade-up d4">
+        <a href="#contact" class="btn btn-green" data-editable="">Book a Call Today</a>
+        <a href="#announcement" class="btn btn-outline" data-editable="">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-accent-bar"></div>
+    <img src="./assets/placeholder.jpg" data-editable-image="" alt="A parent and child — warm, connected, hopeful" style="cursor: pointer;">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-shape s1"></div>
+    <div class="hero-shape s2"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-num" data-editable="">100%</div>
+      <p data-editable="">Strength-focused. Zero deficit framing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ANNOUNCEMENT ══════════ -->
+<section data-zone="announcement" data-zone-label="Announcement" class="section-pad" id="announcement">
+  <div class="announce-deco" aria-hidden="true">
+    <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="350" cy="70" r="200" fill="#2E7D32" opacity="0.08"></circle>
+      <circle cx="390" cy="160" r="160" fill="#3B6FA0" opacity="0.06"></circle>
+      <circle cx="340" cy="300" r="140" fill="#F0C800" opacity="0.10"></circle>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="announce-grid">
+      <div class="announce-img">
+        <div class="announce-img-bar"></div>
+        <img src="./assets/Screenshot 2026-03-19 at 8.05.43 PM.png" data-editable-image="" alt="Father and son — seen, supported, valued" style="cursor: pointer;">
+      </div>
+      <div class="announce-text">
+        <span class="label" data-editable="">Announcement</span>
+        <h2 data-editable="">We are thrilled to announce the launch of the <em>Strength-Based Assessment Lab</em></h2>
+        <p data-editable="">At the heart of the Strength-Based Assessment Lab lies a profound mission — one that puts every child's gifts, talents, and potential at the centre of their educational experience.</p>
+        <ul class="mission-list">
+          <li data-editable="">To uncover and identify the strengths of those who are struggling in their current educational settings.</li>
+          <li data-editable="">To empower students, families, educators, and professionals to create positive, effective, and collaborative learning experiences.</li>
+          <li data-editable="">To foster a world where every student feels valued and is empowered to demonstrate their abilities and skills in a personal and meaningful manner.</li>
+        </ul>
+        <p data-editable="">Our pioneering approach utilizes the meticulously developed Suite of Tools™ (SOT), a field-tested methodology that identifies and nurtures strengths, interests, and talents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOR WHOM ══════════ -->
+<section data-zone="for-whom" data-zone-label="Who We Serve" class="section-pad" id="for-whom">
+  <div class="forwhom-deco d1"></div>
+  <div class="forwhom-deco d2"></div>
+  <div class="container forwhom-inner">
+    <div class="forwhom-header">
+      <span class="label" data-editable="">Who We Serve</span>
+      <h2 data-editable="">Our assessment is for <em>your family</em></h2>
+    </div>
+    <div class="forwhom-grid">
+      <div class="forwhom-card">
+        <div class="forwhom-icon">✨</div>
+        <div>
+          <h3 data-editable="">Bright &amp; Outside-the-Box</h3>
+          <p data-editable="">Children who are sensitive, creative, and think differently — whose gifts aren't visible in conventional school settings.</p>
+        </div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">🏫</div>
+        <div>
+          <h3 data-editable="">Struggling in School</h3>
+          <p data-editable="">Learners who are capable and intelligent, but find traditional educational environments frustrating, overwhelming, or disengaging.</p>
+        </div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">👁</div>
+        <div>
+          <h3 data-editable="">Seen Only for Deficits</h3>
+          <p data-editable="">Children whose reports, assessments, and conversations focus on what they can't do — and who need someone to finally see what they can.</p>
+        </div>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-icon">🤝</div>
+        <div>
+          <h3 data-editable="">Longing for Positive Relationships</h3>
+          <p data-editable="">Families seeking a collaborative, compassionate process built on connection — not compliance, comparison, or correction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section data-zone="testimonials" data-zone-label="Testimonials" class="section-pad" style="position: relative;" id="testimonials">
+  <div class="container">
+    <div class="testi-header">
+      <span class="label" data-editable="">Family Stories</span>
+      <h2 data-editable="">What families are saying</h2>
+    </div>
+    <div class="testi-track-wrap">
+      <div class="testi-track" id="testiTrack" style="transform: translateX(-100%);">
+
+        <div class="testi-item">
+          <div class="testi-card">
+            <blockquote data-editable="">"The Suite of Tools™ provided us with a series of actionable steps to help us understand our child's strengths and interests. The time, patience, and thought put into the process by the team was impressive. They explained in very clear terms the hows and whys of the process, and this empowered us to engage in the most meaningful way — one that will bear fruit for our child in both the short and long term."</blockquote>
+            <cite data-editable="">— Mother of an 8-year-old</cite>
+          </div>
+        </div>
+
+        <div class="testi-item">
+          <div class="testi-card">
+            <blockquote data-editable="">"Dr. Rivera and her team were easy to work with, and the process went smoothly for us and our son. It was so rare to speak about our son's strengths at length with anyone outside of our family — and to know that someone was focusing on his strengths was an incredible relief. Their strength-based report helped the school see our son in a different way, allowing for more flexibility within his day. We could not be more grateful."</blockquote>
+            <cite data-editable="">— Mother of a ten-year-old</cite>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-btn" onclick="testiPrev()" aria-label="Previous">←</button>
+      <div class="testi-dots" id="testiDots">
+        <button class="testi-dot" onclick="testiGoTo(0)" aria-label="Slide 1"></button>
+        <button class="testi-dot active" onclick="testiGoTo(1)" aria-label="Slide 2"></button>
+      </div>
+      <button class="testi-btn" onclick="testiNext()" aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS ══════════ -->
+<section data-zone="process" data-zone-label="Our Process" class="section-pad" id="process">
+  <div class="container">
+    <div class="process-header">
+      <span class="label" data-editable="">Our Process</span>
+      <h2 data-editable="">The Suite of Tools™ Protocol</h2>
+      <p data-editable="">A purposefully designed four-tool protocol to elicit information about student interests, moments of personal best, challenges, goals, and learning preferences — all in an innovative and enjoyable process.</p>
+    </div>
+    <div class="process-steps">
+
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h3 data-editable="">Intake &amp; Matching</h3>
+        <p data-editable="">After an intake interview, you are matched with a highly qualified case manager who will work with your learner and family, using an innovative and enjoyable process to identify your child's strengths and talents — bringing in school and community members as appropriate.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h3 data-editable="">Collaborative Findings</h3>
+        <p data-editable="">The case manager collates findings collected during the process and shares them in a collaborative meeting. Each ally participates in creating opportunities that will enrich and support your child's unique strengths, helping them develop, take root, and thrive.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h3 data-editable="">Detailed Report &amp; Plan</h3>
+        <p data-editable="">The Case Manager documents all findings and suggestions in a detailed report with recommendations for implementation. At a final meeting, you create a talent development plan designed to support your child's strengths — for a lifetime.</p>
+      </div>
+
+    </div>
+    <div class="process-closing">
+      <p data-editable="">"Your family is left with a full heart, a fresh perspective, and an energized understanding of your unique child that will ripple out positively through their lifetime."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DIRECTOR ══════════ -->
+<section data-zone="director" data-zone-label="From Our Director" class="section-pad" id="director">
+  <div class="director-deco d1"></div>
+  <div class="director-deco d2"></div>
+  <div class="container">
+    <div class="director-grid">
+      <div class="director-text">
+        <span class="label" data-editable="">From Our Director</span>
+        <h2 data-editable="">More from Dr. Jade Ann Rivera</h2>
+        <p data-editable="">Dr. Rivera is the visionary behind the Strength-Based Assessment Lab and the Suite of Tools™. Her research and practice have helped hundreds of families shift the conversation — from what their child cannot do, to the extraordinary gifts waiting to be seen.</p>
+        <p data-editable="">Watch Dr. Rivera share the heart of this work, and what she believes every child deserves from the adults in their lives.</p>
+        <a href="#contact" class="btn btn-white" data-editable="">Book a Call Today</a>
+      </div>
+      <div>
+        <div class="video-placeholder" onclick="alert('Video coming soon!')">
+          <img src="./assets/placeholder.jpg" data-editable-image="" alt="Dr. Jade Ann Rivera — Director, Strength-Based Assessment Lab" style="cursor: pointer;">
+          <div class="play-btn" aria-label="Play video"></div>
+          <span class="video-caption" data-editable="">Watch Dr. Rivera's Message</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section data-zone="contact" data-zone-label="Contact" class="section-pad" style="position: relative;" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="label" data-editable="">Connect With Us</span>
+        <h2 data-editable="">Ready to see your child in a new light?</h2>
+        <p data-editable="">We would love to hear about your family's story and explore whether the Strength-Based Assessment Lab is the right next step. Reach out — we respond within 2 business days.</p>
+        <div class="contact-detail">
+          <strong>Location</strong>
+          <span data-editable="">Studio City, California</span>
+        </div>
+        <div class="contact-detail">
+          <strong>Email</strong>
+          <a href="mailto:info@bridgesgraduateschool.com" data-editable="">info@bridgesgraduateschool.com</a>
+        </div>
+        <div class="contact-detail">
+          <strong>Phone</strong>
+          <a href="tel:+18185550000" data-editable="">(818) 555-0000</a>
+        </div>
+        <div style="margin-top: var(--space-xl); position: relative;">
+          <img src="./assets/placeholder.jpg" data-editable-image="" alt="Bridges Graduate School logo" style="max-width: 220px; border-radius: var(--radius); cursor: pointer;">
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="c-name">Your Name</label>
+            <input type="text" id="c-name" placeholder="Full name">
+          </div>
+          <div class="form-row">
+            <label for="c-phone">Phone</label>
+            <input type="tel" id="c-phone" placeholder="(818) 000-0000">
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="c-email">Email Address</label>
+          <input type="email" id="c-email" placeholder="your@email.com">
+        </div>
+        <div class="form-row">
+          <label for="c-message">Tell Us About Your Child &amp; Family</label>
+          <textarea id="c-message" placeholder="Share a little about your child's learning journey and what you're hoping to discover…"></textarea>
+        </div>
+        <button type="button" class="form-submit" onclick="submitForm()">Send Message</button>
+        <div class="form-success" id="formSuccess">
+          Thank you! We'll be in touch within 2 business days. 🌱
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9z" fill="rgba(255,255,255,0.25)"></path>
+          <path d="M8 8h3v8H8zM13 8h3v4h-3z" fill="white"></path>
+        </svg>
+      </div>
+      <div class="footer-brand-text">
+        <strong data-editable="">Bridges Grad School</strong>
+        <span data-editable="">Strength-Based Assessment Lab</span>
+      </div>
+    </div>
+    <p class="footer-copy" data-editable="">© 2025 Bridges Graduate School of Cognitive Diversity. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#" data-editable="">Instagram</a>
+      <a href="#" data-editable="">LinkedIn</a>
+      <a href="#" data-editable="">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Testimonial slider
+  let testiCurrent = 0;
+  const testiTotal = 2;
+  const track = document.getElementById('testiTrack');
+  const dots = document.querySelectorAll('.testi-dot');
+
+  function testiGoTo(n) {
+    testiCurrent = (n + testiTotal) % testiTotal;
+    track.style.transform = `translateX(-${testiCurrent * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === testiCurrent));
+  }
+  function testiNext() { testiGoTo(testiCurrent + 1); }
+  function testiPrev() { testiGoTo(testiCurrent - 1); }
+
+  setInterval(testiNext, 6000);
+
+  // Contact form
+  function submitForm() {
+    const name = document.getElementById('c-name').value;
+    const email = document.getElementById('c-email').value;
+    const phone = document.getElementById('c-phone').value;
+    const msg = document.getElementById('c-message').value;
+    if (!name || !email) { alert('Please enter your name and email.'); return; }
+    const subject = encodeURIComponent('New Inquiry — Strength-Based Assessment Lab');
+    const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\n${msg}`);
+    window.location.href = `mailto:info@bridgesgraduateschool.com?subject=${subject}&body=${body}`;
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+
+
+</body></html>
